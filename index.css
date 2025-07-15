@@ -1,0 +1,237 @@
+:root {
+  --primary: #4361ee;
+  --secondary: #3f37c9;
+  --accent: #eeff00;
+  --danger: #ff0000;
+  --success: #4cc9f0;
+  --light: #f8f9fa;
+  --dark: #212529;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+#task-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+#task-input {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+#task-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(72, 149, 239, 0.25);
+}
+
+#task-form button {
+  padding: 0.8rem 1.5rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+#task-form button:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+}
+
+#task-form button:active {
+  transform: translateY(0);
+}
+
+#task-list {
+  list-style: none;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  animation: slideIn 0.3s ease-out forwards;
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.task-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.task-item.completed {
+  background: #f8f9fa;
+}
+
+.task-item.completed span {
+  text-decoration: line-through;
+  color: #adb5bd;
+}
+
+.task-text {
+  flex: 1;
+  margin: 0 1rem;
+  font-size: 1.1rem;
+  word-break: break-word;
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.task-actions button {
+  padding: 0.5rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-actions button i {
+  margin-right: 0.3rem;
+}
+
+.task-actions .edit {
+  background: var(--accent);
+  color: white;
+}
+
+.task-actions .delete {
+  background: var(--danger);
+  color: white;
+}
+
+.task-actions .complete {
+  background: var(--success);
+  color: white;
+}
+
+.task-actions button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #6c757d;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #dee2e6;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .task-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .task-text {
+    margin: 0.5rem 0;
+  }
+  
+  .task-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@keyframes slideOut {
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+    height: 0;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.task-item.removing {
+  animation: slideOut 0.3s ease-out forwards;
+}
